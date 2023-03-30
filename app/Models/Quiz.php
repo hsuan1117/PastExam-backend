@@ -12,8 +12,13 @@ class Quiz extends Model
 
     protected $fillable = [
         'user_id',
-        'title',
+        'teacher',
+        'course',
+        'course_year',
+        'type',
+        'year',
         'tags',
+        'filename',
         'path'
     ];
 

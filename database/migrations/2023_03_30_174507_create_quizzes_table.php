@@ -13,7 +13,12 @@ return new class extends Migration {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
 
-            $table->string('title');
+            $table->string('teacher');
+            $table->string('course');
+            $table->string('type');
+            $table->string('year');
+            $table->string('course_year');
+            $table->string('filename')->nullable();
             $table->string('path')->nullable();
             $table->json('tags')->nullable();
 
