@@ -36,6 +36,7 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
+        $this->middleware('auth:sanctum');
         $validated = $request->validate([
             'teacher' => 'required|string',
             'course_year' => 'required|string',
@@ -47,8 +48,9 @@ class QuizController extends Controller
             'tags.*' => 'required|string',
         ]);
 
-        $quiz = Quiz::create($validated);
-        $quiz->path = $request->file('file')->storePublicly('quizzes');
+        $quiz = auth('sanctum')->user()->quiz()->create($validated);
+        $quiz->filename = $request->file('file')->getClientOriginalName();
+        $quiz->path = $request->file('file')->store('quizzes');
         $quiz->save();
         return $quiz;
     }
@@ -81,7 +83,8 @@ class QuizController extends Controller
             $quiz->title = $request->input('title');
         }
         if ($request->has('file')) {
-            $quiz->file = $request->file('file')->store('quizzes');
+            $quiz->filename = $request->file('file')->getClientOriginalName();
+            $quiz->path = $request->file('file')->store('quizzes');
         }
         if ($request->has('tags')) {
             $quiz->tags = $request->input('tags');

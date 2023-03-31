@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DocumentDownloadController;
 use App\Http\Controllers\QuizController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('quiz', QuizController::class);
 Route::post('google', [AuthController::class, 'google']);
+
+Route::post('{quiz}/download', [DocumentDownloadController::class, 'download_request'])->middleware('auth:sanctum');
+Route::get('download', [DocumentDownloadController::class, 'download']);
