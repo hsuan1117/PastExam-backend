@@ -13,8 +13,7 @@ class Report extends Model
     protected $fillable = [
         'user_id',
         'quiz_id',
-        'title',
-        'content',
+        'reason'
     ];
 
     public function user(): BelongsTo

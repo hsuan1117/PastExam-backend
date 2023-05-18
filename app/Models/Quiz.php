@@ -36,4 +36,9 @@ class Quiz extends Model
     {
         return $this->hasMany(DownloadToken::class);
     }
+
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Report::class);
+    }
 }

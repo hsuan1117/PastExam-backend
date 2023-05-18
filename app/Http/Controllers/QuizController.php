@@ -28,7 +28,11 @@ class QuizController extends Controller
         if ($request->has('teacher')) {
             $quiz = $quiz->where('teacher', $request->input('teacher'));
         }
-        return $quiz->get();
+        return $quiz->get()->map(function(Quiz $quiz) {
+            // add report cnt
+            $quiz->report_cnt = $quiz->reports()->count();
+            return $quiz;
+        });
     }
 
     /**

@@ -25,4 +25,5 @@ Route::apiResource('quiz', QuizController::class);
 Route::post('google', [AuthController::class, 'google']);
 
 Route::post('{quiz}/download', [DocumentDownloadController::class, 'download_request'])->middleware('auth:sanctum');
+Route::apiResource('quiz.report', \App\Http\Controllers\ReportController::class)->middleware('auth:sanctum');
 Route::get('download', [DocumentDownloadController::class, 'download']);
